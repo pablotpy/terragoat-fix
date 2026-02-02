@@ -34,15 +34,11 @@ pipeline {
         stage('Scan IaC - Terrascan') {
             steps {
                 script {
-                    echo "--- Iniciando Escaneo de Infraestructura ---"
-                    echo "Analizando directorio: terraform/aws"
+                    echo "--- 🔍 INSPECCIÓN FORENSE DE CÓDIGO ---"
+                    // Esto imprimirá el contenido del archivo s3.tf en la consola de Jenkins
+                    sh "cat terraform/aws/s3.tf"
                     
-                    // Ejecutamos Terrascan
-                    // -i terraform: Tipo de IaC
-                    // -t aws: Proveedor de nube
-                    // -d terraform/aws: Carpeta específica a escanear
-                    // || true: Evita que el pipeline se ponga rojo INMEDIATAMENTE si encuentra fallos,
-                    // para que podamos leer el reporte primero.
+                    echo "--- Iniciando Escaneo ---"
                     sh """
                         docker run ${DOCKER_ARGS} ${TERRASCAN_IMAGE} scan \
                         -i terraform \
