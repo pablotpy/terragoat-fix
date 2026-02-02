@@ -34,7 +34,8 @@ EOF
 resource "aws_ebs_volume" "web_host_storage" {
   # unencrypted volume
   availability_zone = "${var.region}a"
-  encrypted         = true  # Setting this causes the volume to be recreated on apply 
+  encrypted         = true  # CAMBIAMOS A TRUE
+  kms_key_id  = "${aws_kms_key.logs_key.arn}" #AGREGAMOS LLAVE KMS
   size = 1
   tags = merge({
     Name = "${local.resource_prefix.value}-ebs"
@@ -54,8 +55,7 @@ resource "aws_ebs_snapshot" "example_snapshot" {
   # ebs snapshot without encryption
   volume_id   = "${aws_ebs_volume.web_host_storage.id}"
   description = "${local.resource_prefix.value}-ebs-snapshot"
-  encrypted   = true
-  
+
   tags = merge({
     Name = "${local.resource_prefix.value}-ebs-snapshot"
     }, {
