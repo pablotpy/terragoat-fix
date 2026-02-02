@@ -37,6 +37,7 @@ pipeline {
                     echo "--- 🔍 INSPECCIÓN FORENSE DE CÓDIGO ---"
                     // Esto imprimirá el contenido del archivo s3.tf en la consola de Jenkins
                     sh "cat terraform/aws/s3.tf"
+                    sh "cat terraform/aws/ec2.tf"
                     
                     echo "--- Iniciando Escaneo ---"
                     sh """
