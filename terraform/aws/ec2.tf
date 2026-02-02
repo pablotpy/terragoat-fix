@@ -34,9 +34,8 @@ EOF
 resource "aws_ebs_volume" "web_host_storage" {
   # unencrypted volume
   availability_zone = "${var.region}a"
-  #encrypted         = false  # Setting this causes the volume to be recreated on apply 
+  encrypted         = true  # Setting this causes the volume to be recreated on apply 
   size = 1
-  encrypted = true  #<--- !CORREGIDO! Antes no tenia habilitado
   tags = merge({
     Name = "${local.resource_prefix.value}-ebs"
     }, {
