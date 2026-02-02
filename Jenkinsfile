@@ -31,7 +31,7 @@ pipeline {
             }
         }
 
-        tage('Scan IaC - Terrascan') {
+        stage('Scan IaC - Terrascan') {
             steps {
                 script {
                     echo "--- 🕵️‍♂️ TESTIGO DE JENKINS: ec2.tf ---"
