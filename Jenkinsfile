@@ -31,13 +31,12 @@ pipeline {
             }
         }
 
-        stage('Scan IaC - Terrascan') {
+        tage('Scan IaC - Terrascan') {
             steps {
                 script {
-                    echo "--- 🔍 INSPECCIÓN FORENSE DE CÓDIGO ---"
-                    // Esto imprimirá el contenido del archivo s3.tf en la consola de Jenkins
-                    sh "cat terraform/aws/s3.tf"
-                    sh "cat terraform/aws/ec2.tf"
+                    echo "--- 🕵️‍♂️ TESTIGO DE JENKINS: ec2.tf ---"
+                    // Esto imprimirá lo que REALMENTE tiene Jenkins en su disco
+                    sh "grep -C 5 'web_host_storage' terraform/aws/ec2.tf"
                     
                     echo "--- Iniciando Escaneo ---"
                     sh """
